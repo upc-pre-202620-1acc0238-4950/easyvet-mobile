@@ -13,30 +13,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import pe.edu.upc.easyvet.features.home.domain.Product
 import pe.edu.upc.easyvet.core.theme.EasyVetTheme
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-    val products = listOf(
-        Product(
-            id = 1,
-            name = "Royal Canin Maxi Puppy",
-            price = 42.5,
-            description = "Dry food for large breed puppies. Supports bone growth and digestive health.",
-            imageUrl = "https://i.imgur.com/WkZEOU6.png",
-            rating = 4.8,
-        ),
-        Product(
-            id = 2,
-            name = "Eukanuba Active Adult",
-            price = 72.99,
-            description = "Complete nutrition with high-quality proteins for active adult dogs.",
-            imageUrl = "https://i.imgur.com/guSk1sh.png",
-            rating = 4.7
-        )
-    )
+fun HomeScreen(modifier: Modifier = Modifier, viewModel: HomeViewModel) {
+
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+
+
     LazyColumn(modifier = modifier.fillMaxSize()) {
         item {
             Text(text = "Home Screen")
@@ -46,7 +33,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             Text(text = "Item $index")
         }
 
-        items(products) { product ->
+        items(uiState.products) { product ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth(0.45f)
@@ -72,6 +59,5 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Composable
 fun HomeScreenPreview() {
     EasyVetTheme(dynamicColor = false) {
-        HomeScreen()
     }
 }
