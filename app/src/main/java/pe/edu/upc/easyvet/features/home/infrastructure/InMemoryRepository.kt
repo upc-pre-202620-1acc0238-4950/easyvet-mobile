@@ -1,7 +1,9 @@
 package pe.edu.upc.easyvet.features.home.infrastructure
 
+import kotlinx.coroutines.delay
 import pe.edu.upc.easyvet.features.home.domain.Product
 import pe.edu.upc.easyvet.features.home.domain.ProductRepository
+import kotlin.time.Duration.Companion.milliseconds
 
 class InMemoryRepository: ProductRepository {
 
@@ -23,7 +25,8 @@ class InMemoryRepository: ProductRepository {
             rating = 4.7
         )
     )
-    override fun getProducts(): List<Product> {
+    override suspend fun getProducts(): List<Product> {
+        delay(3000.milliseconds)
         return products
     }
 }

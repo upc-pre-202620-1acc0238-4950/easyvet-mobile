@@ -1,10 +1,12 @@
 package pe.edu.upc.easyvet.features.home.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import pe.edu.upc.easyvet.features.home.application.GetProductsUseCase
 
 class HomeViewModel(private val getProducts: GetProductsUseCase = GetProductsUseCase()) :
@@ -14,26 +16,29 @@ class HomeViewModel(private val getProducts: GetProductsUseCase = GetProductsUse
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     fun loadProducts() {
-        _uiState.update { currentState ->
-            currentState.copy(isLoading = true)
+        viewModelScope.launch {
+            _uiState.update { currentState ->
+                currentState.copy(isLoading = true)
+            }
+
+            try {
+                val products = getProducts()
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        products = products,
+                        isLoading = false
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        isLoading = false,
+                        errorMessage = e.message ?: "An unknown error occurred"
+                    )
+                }
+            }
         }
 
-        try {
-            val products = getProducts()
-            _uiState.update { currentState ->
-                currentState.copy(
-                    products = products,
-                    isLoading = false
-                )
-            }
-        } catch (e: Exception) {
-            _uiState.update { currentState ->
-                currentState.copy(
-                    isLoading = false,
-                    errorMessage = e.message ?: "An unknown error occurred"
-                )
-            }
-        }
     }
 
     init {
