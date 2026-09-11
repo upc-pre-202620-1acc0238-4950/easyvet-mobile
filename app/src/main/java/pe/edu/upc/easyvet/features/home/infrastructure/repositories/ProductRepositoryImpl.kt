@@ -23,7 +23,8 @@ class ProductRepositoryImpl(private val service: ProductService
                         name = dto.title,
                         price = dto.price,
                         imageUrl = dto.image,
-                        rating = dto.rating
+                        rating = dto.rating,
+                        description = dto.description
                     )
 
                 }.toList()
