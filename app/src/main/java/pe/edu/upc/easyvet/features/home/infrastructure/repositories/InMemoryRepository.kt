@@ -1,4 +1,4 @@
-package pe.edu.upc.easyvet.features.home.infrastructure
+package pe.edu.upc.easyvet.features.home.infrastructure.repositories
 
 import kotlinx.coroutines.delay
 import pe.edu.upc.easyvet.features.home.domain.Product
