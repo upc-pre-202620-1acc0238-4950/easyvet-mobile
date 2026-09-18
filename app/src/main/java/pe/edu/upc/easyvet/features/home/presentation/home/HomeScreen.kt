@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import pe.edu.upc.easyvet.core.theme.EasyVetTheme
+import pe.edu.upc.easyvet.core.designsystem.theme.EasyVetTheme
 import pe.edu.upc.easyvet.features.home.domain.Product
 import pe.edu.upc.easyvet.features.home.presentation.home.components.ProductCard
 

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import pe.edu.upc.easyvet.core.arrowBack
+import pe.edu.upc.easyvet.core.designsystem.icon.arrowBack
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
