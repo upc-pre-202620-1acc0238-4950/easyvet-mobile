@@ -14,8 +14,13 @@ import coil3.compose.AsyncImage
 import pe.edu.upc.easyvet.features.home.domain.Product
 
 @Composable
-fun ProductCard(modifier: Modifier = Modifier, product: Product) {
+fun ProductCard(
+    modifier: Modifier = Modifier,
+    product: Product,
+    onProductClick: () -> Unit
+) {
     Card(
+        onClick = onProductClick,
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)

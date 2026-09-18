@@ -17,7 +17,7 @@ ksp = "2.3.4"
 
 hilt = "2.60.1"
 
-kotlinSerialization = "2.0.21"
+kotlinSerialization = "2.4.20"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

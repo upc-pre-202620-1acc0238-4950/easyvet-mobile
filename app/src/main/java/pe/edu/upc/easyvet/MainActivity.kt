@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import pe.edu.upc.easyvet.core.theme.EasyVetTheme
-import pe.edu.upc.easyvet.features.home.presentation.home.HomeScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

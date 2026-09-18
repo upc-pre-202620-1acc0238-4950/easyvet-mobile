@@ -22,8 +22,8 @@ import pe.edu.upc.easyvet.core.visibility
 @Composable
 fun ProductDetailScreen(
     id: Int,
-    viewModel: ProductDetailViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
+    viewModel: ProductDetailViewModel = hiltViewModel(),
     onBack: () -> Unit
 ) {
 
