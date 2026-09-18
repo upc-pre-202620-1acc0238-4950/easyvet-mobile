@@ -5,9 +5,9 @@ import pe.edu.upc.easyvet.features.home.domain.Product
 import pe.edu.upc.easyvet.features.home.domain.ProductRepository
 import kotlin.time.Duration.Companion.milliseconds
 
-class InMemoryRepository: ProductRepository {
+class InMemoryRepository : ProductRepository {
 
-    private val products =  listOf(
+    private val products = listOf(
         Product(
             id = 1,
             name = "Royal Canin Maxi Puppy",
@@ -25,8 +25,13 @@ class InMemoryRepository: ProductRepository {
             rating = 4.7
         )
     )
+
     override suspend fun getProducts(): List<Product> {
         delay(3000.milliseconds)
         return products
+    }
+
+    override suspend fun getProductById(id: Int): Product? {
+        return products.find { it.id == id }
     }
 }

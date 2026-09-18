@@ -29,4 +29,23 @@ class ProductRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
+    override suspend fun getProductById(id: Int): Product? {
+
+        val response = service.getProductById(id)
+
+        if (response.isSuccessful) {
+            response.body()?.let { dto ->
+                return Product(
+                    id = dto.id,
+                    name = dto.title,
+                    price = dto.price,
+                    imageUrl = dto.image,
+                    rating = dto.rating,
+                    description = dto.description
+                )
+            }
+        }
+        return null
+    }
+
 }
