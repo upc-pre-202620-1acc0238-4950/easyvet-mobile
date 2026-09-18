@@ -10,6 +10,6 @@ interface ProductService {
     suspend fun getProducts(): Response<ProductsResponseDto>
 
 
-    @GET("retrofit/{id}")
+    @GET("products/{id}")
     suspend fun getProductById(@Path("id") id: Int): Response<ProductDto>
 }

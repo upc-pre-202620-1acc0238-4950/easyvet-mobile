@@ -1,7 +1,9 @@
 package pe.edu.upc.easyvet.features.home.presentation.productdetail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,10 +15,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import pe.edu.upc.easyvet.core.visibility
+import pe.edu.upc.easyvet.core.arrowBack
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,9 +39,9 @@ fun ProductDetailScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(title = {}, navigationIcon =  {
-                IconButton(onClick =  onBack) {
-                    Icon(visibility, contentDescription = "back")
+            TopAppBar(title = {}, navigationIcon = {
+                IconButton(onClick = onBack) {
+                    Icon(arrowBack, contentDescription = "back")
                 }
             })
 
@@ -59,11 +62,15 @@ fun ProductDetailScreen(
                 }
 
                 is ProductDetailUiState.Success -> {
-                    Column(modifier = Modifier.fillMaxSize()) {
+                    Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
                         AsyncImage(
                             model = uiState.product.imageUrl,
-                            contentDescription = uiState.product.name
+                            contentDescription = uiState.product.name,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(0.5f)
                         )
+                        Text(text = uiState.product.description)
                     }
                 }
 
