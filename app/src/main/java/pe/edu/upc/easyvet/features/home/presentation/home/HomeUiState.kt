@@ -1,4 +1,4 @@
-package pe.edu.upc.easyvet.features.home.presentation
+package pe.edu.upc.easyvet.features.home.presentation.home
 
 import pe.edu.upc.easyvet.features.home.domain.Product
 
