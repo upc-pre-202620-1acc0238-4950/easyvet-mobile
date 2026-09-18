@@ -3,9 +3,10 @@ package pe.edu.upc.easyvet.features.home.infrastructure.repositories
 import kotlinx.coroutines.delay
 import pe.edu.upc.easyvet.features.home.domain.Product
 import pe.edu.upc.easyvet.features.home.domain.ProductRepository
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
-class InMemoryRepository : ProductRepository {
+class InMemoryRepository @Inject constructor() : ProductRepository {
 
     private val products = listOf(
         Product(
