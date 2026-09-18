@@ -1,4 +1,4 @@
-package pe.edu.upc.easyvet
+package pe.edu.upc.easyvet.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.NavigationBar
