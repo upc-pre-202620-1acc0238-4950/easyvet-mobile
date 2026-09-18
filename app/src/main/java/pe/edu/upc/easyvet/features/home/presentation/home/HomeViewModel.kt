@@ -27,18 +27,29 @@ class HomeViewModel @Inject constructor(
             }
 
             try {
-                val products = getProducts()
-                _uiState.update { currentState ->
-                    currentState.copy(
-                        products = products,
-                        isLoading = false
-                    )
-                }
+                getProducts()
+                    .onSuccess { products ->
+                        _uiState.update { currentState ->
+                            currentState.copy(
+                                products = products,
+                                isLoading = false
+                            )
+                        }
+                    }
+                    .onFailure { e ->
+                        _uiState.update { currentState ->
+                            currentState.copy(
+                                isLoading = false,
+                                errorMessage = e.message ?: "An unknown error occurred"
+                            )
+                        }
+                    }
+
             } catch (e: Exception) {
                 _uiState.update { currentState ->
                     currentState.copy(
                         isLoading = false,
-                        errorMessage = e.message ?: "An unknown error occurred"
+                        errorMessage = e.message ?: "An expected error occurred"
                     )
                 }
             }

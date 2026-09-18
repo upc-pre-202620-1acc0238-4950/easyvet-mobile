@@ -8,34 +8,36 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(
     private val service: ProductService
 ) : ProductRepository {
-    override suspend fun getProducts(): List<Product> {
+    override suspend fun getProducts(): Result<List<Product>> {
         val response = service.getProducts()
 
         if (response.isSuccessful) {
-            response.body()?.let { productsResponseDto ->
-                return productsResponseDto.products.map { dto ->
-                    Product(
-                        id = dto.id,
-                        name = dto.title,
-                        price = dto.price,
-                        imageUrl = dto.image,
-                        rating = dto.rating,
-                        description = dto.description
-                    )
+            val products = response.body()?.products?.map { dto ->
+                Product(
+                    id = dto.id,
+                    name = dto.title,
+                    price = dto.price,
+                    imageUrl = dto.image,
+                    rating = dto.rating,
+                    description = dto.description
+                )
 
-                }.toList()
+            }?.toList()
+            products?.let { products ->
+                return Result.success(products)
             }
+            return Result.failure(Exception("No products found."))
         }
-        return emptyList()
+        return Result.failure(Exception("No response"))
     }
 
-    override suspend fun getProductById(id: Int): Product? {
+    override suspend fun getProductById(id: Int): Result<Product> {
 
         val response = service.getProductById(id)
 
         if (response.isSuccessful) {
-            response.body()?.let { dto ->
-                return Product(
+            val product = response.body()?.let { dto ->
+                Product(
                     id = dto.id,
                     name = dto.title,
                     price = dto.price,
@@ -44,8 +46,14 @@ class ProductRepositoryImpl @Inject constructor(
                     description = dto.description
                 )
             }
+
+            product?.let { product ->
+                return Result.success(product)
+            }
+            return Result.failure(Exception("No product found."))
         }
-        return null
+        return Result.failure(Exception("No response"))
+
     }
 
 }
