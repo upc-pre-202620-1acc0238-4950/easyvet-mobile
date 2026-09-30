@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object HomeLocalModule {
+object HomeDaoModule {
 
     @Provides
     @Singleton
