@@ -16,7 +16,7 @@ private val Context.authDataStore: DataStore<Preferences> by preferencesDataStor
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AuthLocalModule {
+object AuthDataStoreModule {
 
     @Provides
     @Singleton
