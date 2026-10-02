@@ -3,6 +3,7 @@ package pe.edu.upc.easyvet.features.cart.infrastructure.repositories
 import pe.edu.upc.easyvet.features.cart.domain.Cart
 import pe.edu.upc.easyvet.features.cart.domain.CartItem
 import pe.edu.upc.easyvet.features.cart.domain.CartRepository
+import pe.edu.upc.easyvet.features.cart.infrastructure.remote.AddCartItemRequestDto
 import pe.edu.upc.easyvet.features.cart.infrastructure.remote.CartService
 import javax.inject.Inject
 
@@ -30,6 +31,21 @@ class CartRepositoryImpl @Inject constructor(
                     )
                     return Result.success(cart)
                 }
+            }
+            return Result.failure(Exception(response.message()))
+        } catch (exception: Exception) {
+            return Result.failure(exception)
+        }
+    }
+
+    override suspend fun addItemToCart(
+        productId: Int,
+        quantity: Int
+    ): Result<Unit> {
+        try {
+            val response = service.addItemToCart(AddCartItemRequestDto(productId, quantity))
+            if (response.isSuccessful) {
+                return Result.success(Unit)
             }
             return Result.failure(Exception(response.message()))
         } catch (exception: Exception) {
