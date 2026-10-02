@@ -3,17 +3,20 @@ package pe.edu.upc.easyvet.features.home.presentation.productdetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import pe.edu.upc.easyvet.features.cart.application.AddCartItemUseCase
 import pe.edu.upc.easyvet.features.home.application.GetProductByIdUseCase
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
-    private val getProductById: GetProductByIdUseCase
+    private val getProductById: GetProductByIdUseCase,
+    private val addCartItem: AddCartItemUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<ProductDetailUiState>(ProductDetailUiState.Loading)
@@ -41,6 +44,12 @@ class ProductDetailViewModel @Inject constructor(
 
             }
 
+        }
+    }
+
+    fun addToCart(productId: Int, quantity: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addCartItem(productId, quantity)
         }
     }
 }
