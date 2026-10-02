@@ -1,4 +1,4 @@
-package pe.edu.upc.easyvet.features.onboarding.presentation
+package pe.edu.upc.easyvet.onboarding.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
